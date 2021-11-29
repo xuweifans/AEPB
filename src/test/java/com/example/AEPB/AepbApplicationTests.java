@@ -1,16 +1,58 @@
 package com.example.AEPB;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertTrue;
 
 class HelloTest {
 
-	@Test
-	void should_no_null() {
+    @Test
+    void should_equals_when_compare_two_airCoin_amount_given_amount_is_11_and_amount_is_11() {
+        //given
+        AirCoin AirCoin1 = new AirCoin();
+        AirCoin1.amount = 11.0;
+        AirCoin AirCoin2 = new AirCoin();
+        AirCoin2.amount = 11.0;
 
-		Hello hello = new Hello();
-		assertNotNull(hello);
-	}
+        //when
+        Boolean b = AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
+
+        //then
+        Assertions.assertTrue(b);
+    }
+
+    @Test
+    void should_not_equals_when_compare_two_airCoin_amount_given_amount_is_11_dot_0_and_amount_is_12_dot_0() {
+        //given
+        AirCoin AirCoin1 = new AirCoin();
+        AirCoin1.amount = 11.0;
+        AirCoin AirCoin2 = new AirCoin();
+        AirCoin2.amount = 12.0;
+
+        //when
+        Boolean b = AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
+
+        //then
+        Assertions.assertFalse(b);
+    }
+
+    @Test
+    public void should_throw_exception_when_amount_is_11_and_amount_999999999999999999999999999() {
+        //given
+        AirCoin AirCoin1 = new AirCoin();
+        AirCoin1.amount = 11.0;
+        AirCoin AirCoin2 = new AirCoin();
+        AirCoin2.amount = 999999999999999999999999999.0;
+
+        //when
+        boolean thrown = false;
+        try {
+            AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
+        } catch (OutOfRangeException e) {
+            thrown = true;
+        }
+        Assertions.assertTrue(thrown);
+    }
 }
