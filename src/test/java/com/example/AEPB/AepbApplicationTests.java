@@ -1,6 +1,5 @@
 package com.example.AEPB;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -46,13 +45,13 @@ class HelloTest {
         AirCoin AirCoin2 = new AirCoin();
         AirCoin2.amount = 999999999999999999999999999.0;
 
-        //when
-        boolean thrown = false;
+        // when
+        Throwable t = null;
         try {
             AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
-        } catch (OutOfRangeException e) {
-            thrown = true;
+        } catch (Exception e) {
+            t = e;
         }
-        Assertions.assertTrue(thrown);
+        assertTrue(t instanceof OutOfRangeException);
     }
 }
