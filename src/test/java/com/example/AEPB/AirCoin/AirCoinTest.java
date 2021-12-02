@@ -1,13 +1,11 @@
-package com.example.AEPB;
+package com.example.AEPB.AirCoin;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertTrue;
-
-class HelloTest  {
+public class AirCoinTest {
 
     @Test
     void should_equals_when_compare_two_airCoin_amount_given_amount_is_11_and_amount_is_11() {
@@ -54,6 +52,6 @@ class HelloTest  {
         } catch (Exception e) {
             t = e;
         }
-        Assertions.assertTrue(t instanceof OutOfRangeException);
+        Assertions.assertTrue(t instanceof OutOfAmountRangeException);
     }
 }
