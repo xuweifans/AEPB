@@ -1,0 +1,143 @@
+Index: src/main/java/com/example/AEPB/AirCoin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/AEPB/AirCoin.java b/src/main/java/com/example/AEPB/AirCoin.java
+new file mode 100644
+--- /dev/null	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
++++ b/src/main/java/com/example/AEPB/AirCoin.java	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
+@@ -0,0 +1,6 @@
++package com.example.AEPB;
++
++public class AirCoin {
++
++    Double amount;
++}
+Index: src/main/java/com/example/AEPB/AmountUtils.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/AEPB/AmountUtils.java b/src/main/java/com/example/AEPB/AmountUtils.java
+new file mode 100644
+--- /dev/null	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
++++ b/src/main/java/com/example/AEPB/AmountUtils.java	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
+@@ -0,0 +1,15 @@
++package com.example.AEPB;
++
++public class AmountUtils {
++
++
++    public static Boolean compareTwoAirCoinAmount(AirCoin airCoin1, AirCoin airCoin2) {
++        if (airCoin1.amount > 5000000.0 ){
++            throw new OutOfRangeException();
++        }
++        if (airCoin2.amount > 5000000.0 ){
++            throw new OutOfRangeException();
++        }
++        return airCoin1.amount.equals(airCoin2.amount);
++    }
++}
+Index: src/main/java/com/example/AEPB/Hello.java
+===================================================================
+diff --git a/src/main/java/com/example/AEPB/Hello.java b/src/main/java/com/example/AEPB/Hello.java
+deleted file mode 100644
+--- a/src/main/java/com/example/AEPB/Hello.java	(revision de2171d4baff64f0811a8034d89aeb8a402a3ef3)
++++ /dev/null	(revision de2171d4baff64f0811a8034d89aeb8a402a3ef3)
+@@ -1,5 +0,0 @@
+-package com.example.AEPB;
+-
+-public class Hello {
+-
+-}
+\ No newline at end of file
+Index: src/main/java/com/example/AEPB/OutOfRangeException.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/AEPB/OutOfRangeException.java b/src/main/java/com/example/AEPB/OutOfRangeException.java
+new file mode 100644
+--- /dev/null	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
++++ b/src/main/java/com/example/AEPB/OutOfRangeException.java	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
+@@ -0,0 +1,5 @@
++package com.example.AEPB;
++
++public class OutOfRangeException extends RuntimeException {
++
++}
+Index: src/test/java/com/example/AEPB/AepbApplicationTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/example/AEPB/AepbApplicationTests.java b/src/test/java/com/example/AEPB/AepbApplicationTests.java
+--- a/src/test/java/com/example/AEPB/AepbApplicationTests.java	(revision de2171d4baff64f0811a8034d89aeb8a402a3ef3)
++++ b/src/test/java/com/example/AEPB/AepbApplicationTests.java	(revision 5e04af82259a37c0aacf8811702a4253a4b4c04e)
+@@ -1,16 +1,58 @@
+ package com.example.AEPB;
+ 
++
++import org.junit.jupiter.api.Assertions;
+ import org.junit.jupiter.api.Test;
+-import org.springframework.boot.test.context.SpringBootTest;
+ 
+-import static org.junit.jupiter.api.Assertions.assertNotNull;
++import static org.junit.Assert.assertTrue;
+ 
+ class HelloTest {
+ 
+-	@Test
+-	void should_no_null() {
++    @Test
++    void should_equals_when_compare_two_airCoin_amount_given_amount_is_11_and_amount_is_11() {
++        //given
++        AirCoin AirCoin1 = new AirCoin();
++        AirCoin1.amount = 11.0;
++        AirCoin AirCoin2 = new AirCoin();
++        AirCoin2.amount = 11.0;
++
++        //when
++        Boolean b = AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
++
++        //then
++        Assertions.assertTrue(b);
++    }
++
++    @Test
++    void should_not_equals_when_compare_two_airCoin_amount_given_amount_is_11_dot_0_and_amount_is_12_dot_0() {
++        //given
++        AirCoin AirCoin1 = new AirCoin();
++        AirCoin1.amount = 11.0;
++        AirCoin AirCoin2 = new AirCoin();
++        AirCoin2.amount = 12.0;
++
++        //when
++        Boolean b = AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
+ 
+-		Hello hello = new Hello();
+-		assertNotNull(hello);
+-	}
++        //then
++        Assertions.assertFalse(b);
++    }
++
++    @Test
++    public void should_throw_exception_when_amount_is_11_and_amount_999999999999999999999999999() {
++        //given
++        AirCoin AirCoin1 = new AirCoin();
++        AirCoin1.amount = 11.0;
++        AirCoin AirCoin2 = new AirCoin();
++        AirCoin2.amount = 999999999999999999999999999.0;
++
++        //when
++        boolean thrown = false;
++        try {
++            AmountUtils.compareTwoAirCoinAmount(AirCoin1, AirCoin2);
++        } catch (OutOfRangeException e) {
++            thrown = true;
++        }
++        Assertions.assertTrue(thrown);
++    }
+ }
