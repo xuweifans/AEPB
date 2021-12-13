@@ -1,7 +1,7 @@
 package com.example.AEPB.ParkingLot.ParkingBoy;
 
 /**
- * @author mark
+ * @author dingwei
  */
 public class SmartParkingBoy extends ParkingBoy{
     @Override
