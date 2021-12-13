@@ -1,5 +1,6 @@
 package com.example.AEPB.ParkingLot;
 
+@Deprecated
 public class CarModel {
     private int carId;
 

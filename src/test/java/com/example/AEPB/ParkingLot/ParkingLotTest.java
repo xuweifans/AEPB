@@ -1,5 +1,6 @@
 package com.example.AEPB.ParkingLot;
 
+import com.example.AEPB.ParkingLot.Exceptions.FakeTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

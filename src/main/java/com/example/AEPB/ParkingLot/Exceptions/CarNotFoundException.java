@@ -1,4 +1,4 @@
-package com.example.AEPB.ParkingLot;
+package com.example.AEPB.ParkingLot.Exceptions;
 
 /**
  * @author mark

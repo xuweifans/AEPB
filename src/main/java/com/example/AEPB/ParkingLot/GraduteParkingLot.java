@@ -1,8 +1,11 @@
 package com.example.AEPB.ParkingLot;
 
+import com.example.AEPB.ParkingLot.Exceptions.SameCarParkingSameTimeException;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class GraduteParkingLot {
 
     private PLAdmin plAdmin;

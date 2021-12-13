@@ -1,5 +1,8 @@
 package com.example.AEPB.ParkingLot;
 
+import com.example.AEPB.ParkingLot.Exceptions.CarNotFoundException;
+import com.example.AEPB.ParkingLot.Exceptions.FakeTicketException;
+
 import java.util.*;
 
 /**
@@ -14,6 +17,7 @@ public class ParkingLot {
     private List<Car> cars = new ArrayList<>();
 
 
+    @Deprecated
     public ParkingTicket entry(Car car) {
         if (cars.size() == maxParkingSpaceCount) {
             return null;
@@ -25,6 +29,7 @@ public class ParkingLot {
         return ticket;
     }
 
+    @Deprecated
     public Optional<Car> pickUpCar(ParkingTicket ticket) {
         String licensePlate = ticket.getLicensePlate();
         ParkingTicket parkingTicket = parkingSelfTickets.get(licensePlate);

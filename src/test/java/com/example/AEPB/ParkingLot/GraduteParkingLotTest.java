@@ -1,5 +1,6 @@
 package com.example.AEPB.ParkingLot;
 
+import com.example.AEPB.ParkingLot.Exceptions.SameCarParkingSameTimeException;
 import org.junit.Assert;
 import org.junit.Test;
 
