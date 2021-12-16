@@ -14,15 +14,15 @@ public class ParkingLotTest {
     @Test
     public void should_pass_when_enter_given_parking_lot_current_space_count_is_200() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1, 500);
         for (int i = 0; i < 200; i++) {
             Car car = new Car(UUID.randomUUID().toString());
-            parkingLot.entry(car);
+            parkingLot.park(car);
         }
         Car car = new Car("陕A 12SF32");
 
         //when
-        ParkingTicket ticket = parkingLot.entry(car);
+        ParkingTicket ticket = parkingLot.park(car);
 
         //then
         Assertions.assertNotNull(ticket);
@@ -32,9 +32,9 @@ public class ParkingLotTest {
     @Test
     public void should_given_a_car_when_pick_up_given_a_right_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1, 500);
         Car myCar = new Car("陕A 12SF32");
-        ParkingTicket ticket = parkingLot.entry(myCar);
+        ParkingTicket ticket = parkingLot.park(myCar);
 
         //when
         Optional<Car> car = parkingLot.pickUpCar(ticket);
@@ -47,15 +47,15 @@ public class ParkingLotTest {
     //sad path
     @Test
     public void should_block_when_enter_given_parking_lot_current_space_count_full_with_500() {
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(1, 500);
         for (int i = 0; i < 500; i++) {
             Car car = new Car(UUID.randomUUID().toString());
-            parkingLot.entry(car);
+            parkingLot.park(car);
         }
         Car car = new Car("陕A 12SF32");
 
         //when
-        ParkingTicket ticket = parkingLot.entry(car);
+        ParkingTicket ticket = parkingLot.park(car);
 
         //then
         Assertions.assertNull(ticket);
@@ -66,8 +66,8 @@ public class ParkingLotTest {
     @Test
     public void should_throw_fake_ticket_exception_when_pick_up_given_fake_paring_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingTicket ticket = new ParkingTicket("陕A 12SF32");
+        ParkingLot parkingLot = new ParkingLot(1, 500);
+        ParkingTicket ticket = new ParkingTicket(1, "陕A 12SF32");
 
         //when
         assertThrows(FakeTicketException.class, () -> parkingLot.pickUpCar(ticket));

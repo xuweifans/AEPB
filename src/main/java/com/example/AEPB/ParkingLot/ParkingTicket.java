@@ -8,17 +8,26 @@ import java.util.Objects;
  */
 public class ParkingTicket {
 
+
+    private final Integer parkingLotId;
+
     private final String licensePlate;
 
     private final Date entryTime;
 
-    public ParkingTicket(String licensePlate) {
+    public ParkingTicket(int id, String licensePlate) {
+        this.parkingLotId = id;
         this.licensePlate = licensePlate;
         this.entryTime = new Date();
     }
 
     public String getLicensePlate() {
         return licensePlate;
+    }
+
+
+    public Integer getParkingLotId() {
+        return parkingLotId;
     }
 
     @Override
